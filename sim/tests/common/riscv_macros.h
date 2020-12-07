@@ -10,6 +10,12 @@
 // Begin Macro
 //-----------------------------------------------------------------------
 
+#define SCR1_SIM_PRINT_ADDR (0xf0000000)
+
+#define RVTEST_PUTCHAR(c)                                               \
+	li a0, (c);                                                     \
+	sb a0, 0(a1);
+
 #define RVTEST_RV64U                                                    \
   .macro init;                                                          \
   .endm
@@ -126,6 +132,16 @@ trap_vector:                                                            \
         INTERRUPT_HANDLER;                                              \
 handle_exception:                                                       \
         /* we don't know how to handle whatever the exception was */    \
+        li a6, 0x2;                                                     \
+	bne a4, a6, other_exception;                                    \
+       	li a1, SCR1_SIM_PRINT_ADDR;					\
+	RVTEST_PUTCHAR('I');						\
+	RVTEST_PUTCHAR('L');						\
+	RVTEST_PUTCHAR('L');						\
+	RVTEST_PUTCHAR('E');						\
+	RVTEST_PUTCHAR('G');						\
+	RVTEST_PUTCHAR('A');						\
+	RVTEST_PUTCHAR('L');						\
 other_exception:                                                        \
         /* some unhandlable exception occurred */                       \
         li   a0, 0x1;                                                   \

@@ -12,7 +12,6 @@ MEMORY {
 }
 
 STACK_SIZE = 1024;
-
 CL_SIZE = 32;
 
 SECTIONS {
@@ -20,7 +19,7 @@ SECTIONS {
   /* code segment */
   .text.init 0 : { 
     FILL(0);
-    . = 0x100 - 12;
+    . = 0x100-12;
     SIM_EXIT = .;
     LONG(0x13);
     SIM_STOP = .;
@@ -31,7 +30,7 @@ SECTIONS {
     *(.text.init) 
   } >RAM
 
-  .text  : {
+  .text : {
     *crt.o(.text .text.*)
     *(.text .text.*)
     *(sc_test_section)
