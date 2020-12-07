@@ -33,7 +33,7 @@
  1ea:	a091                	j	22e <other_exception>
 
 000001ec <handle_exception>:
- 1ec:	482d                	li	a6,11
+ 1ec:	4809                	li	a6,2
  1ee:	05071063          	bne	a4,a6,22e <other_exception>
  1f2:	f00005b7          	lui	a1,0xf0000
  1f6:	04900513          	li	a0,73
